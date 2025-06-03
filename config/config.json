@@ -1,0 +1,10 @@
+{
+    "platformName": "Android",
+    "deviceName": "bdc7b15f",
+    "appPackage": "com.khusm.app",
+    "appActivity": ".MainActivity",
+    "automationName": "UiAutomator2",
+    "ignoreHiddenApiPolicyError": true,
+    "noReset": true
+  }
+  
