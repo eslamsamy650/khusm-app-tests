@@ -1,0 +1,42 @@
+name: Appium Tests for Flutter App
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  appium-test:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Set up Appium
+      run: |
+        npm install -g appium
+        appium -v
+
+    - name: Set up Python (for Python tests)
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.11
+
+    - name: Install Python dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Start Appium server (background)
+      run: |
+        appium &
+
+    - name: Run Appium tests
+      run: |
+        python -m unittest discover test/
