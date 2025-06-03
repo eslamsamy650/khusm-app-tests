@@ -1,0 +1,61 @@
+name: Android Emulator UI Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  android-emulator-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      - name: Set up Android SDK
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 30
+          target: google_apis
+          arch: x86_64
+          profile: Nexus 6
+          script: |
+            echo "Emulator started"
+
+      - name: Install Python and dependencies
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Start Appium server
+        run: |
+          npm install -g appium
+          appium --base-path /wd/hub &
+          sleep 15
+
+      - name: Install APK into emulator
+        run: |
+          adb install Khusm-V1.apk
+
+      - name: Run Pytest
+        run: |
+          pytest tests/ --html=report.html --self-contained-html
+
+      - name: Upload Test Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: html-report
+          path: report.html

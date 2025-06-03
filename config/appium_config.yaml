@@ -3,7 +3,7 @@
   "appium:deviceName": "bdc7b15f",
   "appium:udid": "bdc7b15f",
   "appium:platformVersion": "15.0",
-  "appium:app": "C:/Users/eslam/Downloads/Khusm-V1.apk",
+  "appium:app": "D:/Work/Mediconsult/Khusm_Automation/Khusm-V1.apk",
   "appium:appPackage": "com.khusm.app",
   "appium:appActivity": "com.khusm.app.MainActivity",
   "appium:automationName": "UiAutomator2",

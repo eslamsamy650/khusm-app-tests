@@ -32,7 +32,7 @@ def test_successful_registration(driver):
     registration.skip_onbarding_page()
     registration.navigate_to_active_card_screen()
     registration.click_card_id()
-    registration.enter_card("25001241")
+    registration.enter_card("25001242")
     registration.hide_keyboard_if_visible()
     registration.click_name()
     registration.enter_name("Eslam")
